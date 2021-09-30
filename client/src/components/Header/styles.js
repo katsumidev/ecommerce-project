@@ -16,7 +16,7 @@ export const Container = styled.div`
   color: #ffffff;
   z-index: 999;
 
-  @media (max-width: 400px) {
+  @media (max-width: 500px) {
     padding: 0;
   }
 `;
@@ -112,7 +112,7 @@ export const UserInfo = styled.div`
 export const DropDownContainer = styled.div`
   position: relative;
 
-  @media (max-width: 400px) {
+  @media (max-width: 500px) {
     position: fixed;
     width: 100vw;
     height: 100vh;
@@ -138,7 +138,7 @@ export const DropDownMenu = styled.div`
   transform: translateY(-20px);
   box-shadow: 0 10px 10px #666;
 
-  @media (max-width: 400px) {
+  @media (max-width: 500px) {
     position: relative;
     width: 100%;
     height: 100%;

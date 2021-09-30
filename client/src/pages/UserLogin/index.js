@@ -51,25 +51,25 @@ function UserLogin() {
   return (
     <Container>
       <LoginWrapper>
-        <h2>Olá 👋, digite seu email e senha cadastrado!</h2>
+        <h2>Hi 👋, Use your email and password to login!</h2>
         <p>Email</p>
         <LoginInput
           type="text"
           onChange={(e) => setUserEmail(e.target.value)}
         />
-        <p>Senha</p>
+        <p>Password</p>
         <LoginInput
           type="password"
           onChange={(e) => setUserPass(e.target.value)}
         />
         <LoginButton
           type="button"
-          value="Entrar"
+          value="Login"
           onClick={() => authenticateUser()}
         />
         <CreateAccountButton
           type="button"
-          value="Crie sua conta"
+          value="Create an account"
           onClick={() => (window.location.href = "/register")}
         />
       </LoginWrapper>

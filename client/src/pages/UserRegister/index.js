@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { AiFillCamera } from "../../styles/Icons";
 import {
   Container,
   RegisterWrapper,
@@ -93,16 +94,16 @@ function UserRegister() {
   return (
     <Container>
       <RegisterWrapper>
-        <p>Seu nome</p>
+        <p>Your name</p>
         <RegisterInput type="text" onChange={(e) => setName(e.target.value)} />
-        <p>Seu email</p>
-        <RegisterInput type="text" onChange={(e) => setEmail(e.target.value)} />
-        <p>Sua senha</p>
+        <p>Your email</p>
+        <RegisterInput type="email" onChange={(e) => setEmail(e.target.value)} />
+        <p>Your password</p>
         <RegisterInput
           type="password"
           onChange={(e) => setPassword(e.target.value)}
         />
-        <p>Seu CEP</p>
+        <p>Your postal code</p>
         <NumberInput onChange={setCEP} enableMobileNumericKeyboard />
         <Dropzone accept="image/*" onDropAccepted={handleUpload}>
           {({ getRootProps, getInputProps, isDragActive, isDragReject }) => (
@@ -111,6 +112,7 @@ function UserRegister() {
               isDragActive={isDragActive}
               isDragReject={isDragReject}
             >
+              <AiFillCamera size={30} color="gray" />
               <input {...getInputProps()} />
               {renderDragMessage(isDragActive, isDragReject)}
             </DropContainer>
@@ -124,7 +126,7 @@ function UserRegister() {
         )}
         <RegisterButton
           type="button"
-          value="Criar conta"
+          value="Create account"
           onClick={() => createUserAccount()}
         />
       </RegisterWrapper>

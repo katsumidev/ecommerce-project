@@ -9652,6 +9652,11 @@ react-circular-progressbar@^2.0.4:
   resolved "https://registry.yarnpkg.com/react-circular-progressbar/-/react-circular-progressbar-2.0.4.tgz#5b04a9cf6be8c522c180e4e99ec6db63677335b0"
   integrity sha512-OfX0ThSxRYEVGaQSt0DlXfyl5w4DbXHsXetyeivmoQrh9xA9bzVPHNf8aAhOIiwiaxX2WYWpLDB3gcpsDJ9oww==
 
+react-currency-input-field@^3.5.1:
+  version "3.5.1"
+  resolved "https://registry.yarnpkg.com/react-currency-input-field/-/react-currency-input-field-3.5.1.tgz#460318aba22d592f7e886a314ac8a996240acf49"
+  integrity sha512-rUG6WB7g3KLpJtDbtHhlN8FRuOZmTUORs0sCIyGRjcQxofGrKcZ6rwQFSmYdtPRAQ4ut/LMJkDLP+4rDAZmRqg==
+
 react-cursor-position@2.5.3:
   version "2.5.3"
   resolved "https://registry.yarnpkg.com/react-cursor-position/-/react-cursor-position-2.5.3.tgz#683acdeeba0e225d856fa8a26ae3b4333de7b294"

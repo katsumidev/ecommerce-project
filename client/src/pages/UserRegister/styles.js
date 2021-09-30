@@ -91,6 +91,7 @@ export const DropContainer = styled.div`
   border-radius: 4px;
   cursor: pointer;
   display: flex;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
 

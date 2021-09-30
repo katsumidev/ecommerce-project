@@ -1,4 +1,5 @@
-import styled, {css} from "styled-components";
+import styled, { css } from "styled-components";
+import CurrencyInput from "react-currency-input-field";
 import InputNumber from "react-input-number";
 
 export const Container = styled.div``;
@@ -17,8 +18,8 @@ export const ProductRegisterWrapper = styled.div`
 
 export const ProductRegisterInput = styled.input`
   width: 100%;
-  padding: 0.5rem;
-  margin: 10px;
+  padding: 1rem;
+  margin: 10px 0;
   border-radius: 12px;
   outline: none;
   background-color: transparent;
@@ -27,8 +28,18 @@ export const ProductRegisterInput = styled.input`
 
 export const NumberInput = styled(InputNumber)`
   width: 100%;
-  padding: 0.5rem;
-  margin: 10px;
+  padding: 1rem;
+  margin: 10px 0;
+  border-radius: 12px;
+  outline: none;
+  background-color: transparent;
+  border: 2px solid var(--accent-color);
+`;
+
+export const PriceInput = styled(CurrencyInput)`
+  width: 100%;
+  padding: 1rem;
+  margin: 10px 0;
   border-radius: 12px;
   outline: none;
   background-color: transparent;
@@ -37,8 +48,8 @@ export const NumberInput = styled(InputNumber)`
 
 export const ProductRegisterSelect = styled.select`
   width: 100%;
-  padding: 0.5rem;
-  margin: 10px;
+  padding: 1rem;
+  margin: 10px 0;
   border-radius: 12px;
   outline: none;
   background-color: transparent;
@@ -49,12 +60,21 @@ export const Row = styled.div`
   display: flex;
   flex-direction: row;
   justify-content: space-between;
+  width: 90%;
+
+  @media (max-width: 900px) {
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: auto;
+  }
 `;
 
 export const Column = styled.div`
   display: flex;
   flex-direction: column;
   margin: 10px;
+  width: 100%;
 
   p {
     font-size: 9pt;
@@ -103,15 +123,24 @@ export const UploadMessage = styled.h5`
 `;
 
 export const DropContainer = styled.div`
-  padding: 10px;
-  margin: 10px;
-  width: 100%;
+  margin: 10px 0;
+  width: 300px;
+  height: 150px;
   border: 1px dashed #ddd;
   border-radius: 4px;
   cursor: pointer;
   display: flex;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
+
+  @media (max-width: 900px) {
+    width: 100%;
+  }
+
+  p {
+    color: gray;
+  }
 
   transition: height 0.2s ease;
   ${(props) => props.isDragActive && dragActive};
@@ -119,3 +148,15 @@ export const DropContainer = styled.div`
 `;
 
 export const InformationWrapper = styled.div``;
+
+export const ImageContainer = styled.div`
+  display: flex;
+  margin: 10px;
+  align-items: center;
+`;
+
+export const Preview = styled.img`
+  max-width: 200px;
+  height: 150px;
+  border-radius: 8px;
+`;

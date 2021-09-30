@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import Dropzone from "react-dropzone";
-import UploadedImage from "../UserRegister/index";
+import { AiFillCamera } from "../../styles/Icons";
 import {
   Container,
   ProductRegisterInput,
@@ -13,7 +13,19 @@ import {
   FinishBtn,
   DropContainer,
   UploadMessage,
+  ImageContainer,
+  PriceInput,
+  Preview,
 } from "./styles";
+
+function UploadedImage(props) {
+  return (
+    <ImageContainer>
+      <Preview src={props.preview} />
+      <p>{props.name}</p>
+    </ImageContainer>
+  );
+}
 
 function ProductRegister() {
   const [name, setName] = useState("");
@@ -67,7 +79,7 @@ function ProductRegister() {
 
   function renderDragMessage(isDragActive, isDragReject) {
     if (!isDragActive) {
-      return <UploadMessage>Drag images here...</UploadMessage>;
+      return <UploadMessage>Drag a image to here...</UploadMessage>;
     }
 
     if (isDragReject) {
@@ -90,16 +102,23 @@ function ProductRegister() {
   return (
     <Container>
       <ProductRegisterWrapper>
+        <hr />
         <h1>Register your product</h1>
-
         <Row>
           <Column>
-            <p>Name</p>
-            <ProductRegisterInput onChange={(e) => setName(e.target.value)} />
-            <p>Description</p>
-            <ProductRegisterInput onChange={(e) => setDesc(e.target.value)} />
-            <p>Brand</p>
-            <ProductRegisterInput onChange={(e) => setBrand(e.target.value)} />
+            <ProductRegisterInput
+              type="textbox"
+              placeholder="Product Title*"
+              onChange={(e) => setName(e.target.value)}
+            />
+            <ProductRegisterInput
+              placeholder="Product Description*"
+              onChange={(e) => setDesc(e.target.value)}
+            />
+            <ProductRegisterInput
+              placeholder="Product Brand*"
+              onChange={(e) => setBrand(e.target.value)}
+            />
             <p>Category</p>
             <ProductRegisterSelect
               onChange={(e) => setCategory(e.target.value)}
@@ -109,14 +128,48 @@ function ProductRegister() {
             </ProductRegisterSelect>
             <p>Tags</p>
             <ProductRegisterInput />
+            <Row>
+              <Dropzone accept="image/*" onDropAccepted={handleUpload}>
+                {({
+                  getRootProps,
+                  getInputProps,
+                  isDragActive,
+                  isDragReject,
+                }) => (
+                  <DropContainer
+                    {...getRootProps()}
+                    isDragActive={isDragActive}
+                    isDragReject={isDragReject}
+                  >
+                    <AiFillCamera size={30} />
+                    <input {...getInputProps()} />
+                    {renderDragMessage(isDragActive, isDragReject)}
+                  </DropContainer>
+                )}
+              </Dropzone>
+              {pictureInfo.name != null && (
+                <UploadedImage preview={pictureInfo.preview}></UploadedImage>
+              )}
+            </Row>
           </Column>
           <Column>
-            <p>Initial Stock</p>
-            <NumberInput onChange={setStock} enableMobileNumericKeyboard />
+            <NumberInput
+              placeholder="Initial Stock*"
+              onChange={setStock}
+              enableMobileNumericKeyboard
+            />
             <p>Delivery Price</p>
-            <NumberInput onChange={setDelPrice} enableMobileNumericKeyboard />
+            <PriceInput
+              defaultValue={0}
+              intlConfig={{ locale: "en-US", currency: "USD" }}
+              onValueChange={(value, name) => setDelPrice(value)}
+            />
             <p>Price</p>
-            <NumberInput onChange={setPrice} enableMobileNumericKeyboard />
+            <PriceInput
+              defaultValue={0}
+              intlConfig={{ locale: "en-US", currency: "USD" }}
+              onValueChange={(value, name) => setPrice(value)}
+            />
             <p>Portion</p>
             <ProductRegisterSelect
               onChange={(e) => setPortion(parseInt(e.target.value))}
@@ -125,29 +178,6 @@ function ProductRegister() {
                 <option value={data}>{data}</option>
               ))}
             </ProductRegisterSelect>
-            <Dropzone accept="image/*" onDropAccepted={handleUpload}>
-              {({
-                getRootProps,
-                getInputProps,
-                isDragActive,
-                isDragReject,
-              }) => (
-                <DropContainer
-                  {...getRootProps()}
-                  isDragActive={isDragActive}
-                  isDragReject={isDragReject}
-                >
-                  <input {...getInputProps()} />
-                  {renderDragMessage(isDragActive, isDragReject)}
-                </DropContainer>
-              )}
-            </Dropzone>
-            {/* {pictureInfo.name != null && (
-              <UploadedImage
-                preview={pictureInfo.preview}
-                name={pictureInfo.name}
-              ></UploadedImage>
-            )} */}
           </Column>
         </Row>
         <InformationWrapper>
