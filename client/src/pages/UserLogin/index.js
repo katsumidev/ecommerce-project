@@ -13,7 +13,7 @@ function UserLogin() {
   const [userPass, setUserPass] = useState("");
 
   function authenticateUser() {
-    fetch("http://localhost:3001/auth/authenticate", {
+    fetch(`${process.env.REACT_APP_SERVER_URL}/auth/authenticate`, {
       method: "post",
       headers: {
         "Content-Type": "application/json",

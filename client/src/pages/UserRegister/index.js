@@ -44,7 +44,7 @@ function UserRegister() {
       pictureInfo.file != null &&
       password != null
     ) {
-      fetch("http://localhost:3001/auth/register", {
+      fetch(`${process.env.REACT_APP_SERVER_URL}/auth/register`, {
         method: "post",
         headers: {
           Accept: "application/json",

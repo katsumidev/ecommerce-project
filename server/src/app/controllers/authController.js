@@ -19,7 +19,7 @@ router.post(
   "/register",
   multer(multerConfig).single("file"),
   async (req, res) => {
-    const { email, name } = req.body; // uso o (ES6 Destructuring assignment) para obter o valor email do json enviado pela requisição do usúario
+    const { email, name, cep } = req.body; // uso o (ES6 Destructuring assignment) para obter o valor email do json enviado pela requisição do usúario
     const { filename: key } = req.file;
 
     try {
@@ -32,7 +32,7 @@ router.post(
         name: name,
         email: email,
         password: req.body.password,
-        cep: req.body.cep,
+        cep: cep,
         picture: key,
       }); // constroi um documento (instância de um modelo) recebdo como parametros o json de requisição (o documento só reconhece os parametros definidos no schema)
 

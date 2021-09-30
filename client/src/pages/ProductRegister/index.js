@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
-
+import Dropzone from "react-dropzone";
+import UploadedImage from "../UserRegister/index";
 import {
   Container,
   ProductRegisterInput,
@@ -10,6 +11,8 @@ import {
   NumberInput,
   InformationWrapper,
   FinishBtn,
+  DropContainer,
+  UploadMessage,
 } from "./styles";
 
 function ProductRegister() {
@@ -22,29 +25,31 @@ function ProductRegister() {
   const [delivery, setDelPrice] = useState(0);
   const [price, setPrice] = useState(0);
   const [portion, setPortion] = useState(0);
+  const [pictureInfo, setPictureInfo] = useState({});
 
   function registerProduct() {
-    fetch("http://localhost:3001/product/register", {
+    const data = new FormData();
+
+    data.append("name", name);
+    data.append("description", desc);
+    data.append("brand", brand);
+    data.append("category", category);
+    data.append("tags", ["test"]);
+    data.append("countInStock", stock);
+    data.append("deliveryPrice", delivery);
+    data.append("price", price);
+    data.append("quantity", 1);
+    data.append("portion", portion);
+    data.append("file", pictureInfo.file);
+
+    fetch(`${process.env.REACT_APP_SERVER_URL}/product/register`, {
       method: "post",
       headers: {
-        "Content-Type": "application/json",
         Accept: "application/json",
         Authorization: `Bearer ${localStorage.getItem("access_token")}`,
       },
-      body: JSON.stringify({
-        name: name,
-        description: desc,
-        brand: brand,
-        category: category,
-        tags: ["fl"],
-        countInStock: stock,
-        deliveryPrice: delivery,
-        price: price,
-        portion: portion,
-      }),
+      body: data,
     }).then(async (res) => {
-      let data = await res.json();
-
       switch (res.status) {
         case 404:
           console.log("Usuário não encontrado");
@@ -57,6 +62,28 @@ function ProductRegister() {
           window.location.href = "/";
           break;
       }
+    });
+  }
+
+  function renderDragMessage(isDragActive, isDragReject) {
+    if (!isDragActive) {
+      return <UploadMessage>Drag images here...</UploadMessage>;
+    }
+
+    if (isDragReject) {
+      return <UploadMessage type="error">Invalid file type</UploadMessage>;
+    }
+
+    return <UploadMessage type="success">Drop it here</UploadMessage>;
+  }
+
+  function handleUpload(file) {
+    file.map((item) => {
+      setPictureInfo({
+        file: item,
+        name: item.name,
+        preview: URL.createObjectURL(item),
+      });
     });
   }
 
@@ -98,6 +125,29 @@ function ProductRegister() {
                 <option value={data}>{data}</option>
               ))}
             </ProductRegisterSelect>
+            <Dropzone accept="image/*" onDropAccepted={handleUpload}>
+              {({
+                getRootProps,
+                getInputProps,
+                isDragActive,
+                isDragReject,
+              }) => (
+                <DropContainer
+                  {...getRootProps()}
+                  isDragActive={isDragActive}
+                  isDragReject={isDragReject}
+                >
+                  <input {...getInputProps()} />
+                  {renderDragMessage(isDragActive, isDragReject)}
+                </DropContainer>
+              )}
+            </Dropzone>
+            {/* {pictureInfo.name != null && (
+              <UploadedImage
+                preview={pictureInfo.preview}
+                name={pictureInfo.name}
+              ></UploadedImage>
+            )} */}
           </Column>
         </Row>
         <InformationWrapper>

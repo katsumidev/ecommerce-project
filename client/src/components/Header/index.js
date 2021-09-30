@@ -33,7 +33,7 @@ function Header() {
   const [locationInfo, setLocationInfo] = useState({});
 
   useEffect(() => {
-    fetch("http://localhost:3001/auth/consult", {
+    fetch(`${process.env.REACT_APP_SERVER_URL}/auth/consult`, {
       method: "get",
       headers: {
         "Content-Type": "application/json",
@@ -135,12 +135,14 @@ function Header() {
             </>
           )}
         </UserInfo>
-        <DropDownContainer ref={dropdownRef}>
+        <DropDownContainer open={open} ref={dropdownRef}>
           {open && (
             <DropDownMenu>
               {logged ? (
                 <UserProfile>
-                  <ProfilePicture picture={`http://localhost:3001/files/${userData.picture}`} />
+                  <ProfilePicture
+                    picture={`${process.env.REACT_APP_SERVER_URL}/files/${userData.picture}`}
+                  />
                   <div className="wrapper">
                     <h3>Hi {userData.name} 👋 </h3>
                     <a href="/login" onClick={() => logout()}>

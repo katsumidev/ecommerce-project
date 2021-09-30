@@ -118,6 +118,8 @@ export const DropDownContainer = styled.div`
     height: 100vh;
     top: 80px;
     left: 0;
+
+    ${(props) => props.open ? `display: flex` : `display: none`}
   }
 `;
 

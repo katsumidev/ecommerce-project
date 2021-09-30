@@ -1,4 +1,4 @@
-import styled from "styled-components";
+import styled, {css} from "styled-components";
 import InputNumber from "react-input-number";
 
 export const Container = styled.div``;
@@ -79,6 +79,43 @@ export const FinishBtn = styled.input`
   :hover {
     background-color: var(--accent-color-hover);
   }
+`;
+
+const dragActive = css`
+  border-color: #78e5d5;
+`;
+
+const dragReject = css`
+  border-color: #e57878;
+`;
+
+const messageColors = {
+  default: "#999",
+  error: "#e57878",
+  success: "#78e5d5",
+};
+
+export const UploadMessage = styled.h5`
+  display: flex;
+  color: ${(props) => messageColors[props.type || "default"]};
+  justify-content: center;
+  align-items: center;
+`;
+
+export const DropContainer = styled.div`
+  padding: 10px;
+  margin: 10px;
+  width: 100%;
+  border: 1px dashed #ddd;
+  border-radius: 4px;
+  cursor: pointer;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  transition: height 0.2s ease;
+  ${(props) => props.isDragActive && dragActive};
+  ${(props) => props.isDragReject && dragReject};
 `;
 
 export const InformationWrapper = styled.div``;

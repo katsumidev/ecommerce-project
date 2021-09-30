@@ -13,7 +13,7 @@ module.exports = {
         if (err) {
           cb(err);
         }
-        const fileName = `${hash.toString("hex")}-${file.originalname}`;
+        const fileName = `${hash.toString("hex")}-${file.originalname.replaceAll(/\s/g,'').replaceAll(/[^0-9a-zA-Z.]/g, '')}`;
         cb(null, fileName);
       });
     },

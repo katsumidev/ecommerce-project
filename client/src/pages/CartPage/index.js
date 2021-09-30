@@ -8,7 +8,7 @@ function CartCard(props) {
 
   function undoRemove() {
     setValid(!valid);
-    fetch("http://localhost:3001/cart/addToCart", {
+    fetch(`${process.env.REACT_APP_SERVER_URL}/cart/addToCart`, {
       method: "post",
       headers: {
         "Content-Type": "application/json",
@@ -29,7 +29,7 @@ function CartCard(props) {
 
   function removeFromCart() {
     setValid(!valid);
-    fetch(`http://localhost:3001/cart/removeFromCart?id=${props.id}`, {
+    fetch(`${process.env.REACT_APP_SERVER_URL}/cart/removeFromCart?id=${props.id}`, {
       method: "get",
       headers: {
         "Content-Type": "application/json",
@@ -46,7 +46,7 @@ function CartCard(props) {
       {valid ? (
         <>
           <Row>
-            <img src={props.image}></img>
+            <img src={`${process.env.REACT_APP_SERVER_URL}/files/${props.image}`}></img>
             <Info>
               <p>{props.title}</p>
               <sub>
@@ -98,7 +98,7 @@ function CartPage() {
   const [userData, setUserData] = useState({});
 
   useEffect(() => {
-    fetch("http://localhost:3001/cart/consultTheCart", {
+    fetch(`${process.env.REACT_APP_SERVER_URL}/cart/consultTheCart`, {
       method: "get",
       headers: {
         "Content-Type": "application/json",
@@ -108,19 +108,9 @@ function CartPage() {
     }).then(async (res) => {
       let data = await res.json();
 
-      if (logged) {
-        data.product.forEach((item) => {
-          data.cart.forEach((cartItem) => {
-            if (item._id === cartItem.id) {
-              item.quantity = cartItem.quantity;
-            }
-          });
-        });
-      }
-
       switch (res.status) {
         case 200:
-          setCartData({ data: data.product });
+          setCartData({ data: data.product, data2: data.cart });
           setLogged(true);
           break;
       }
@@ -128,7 +118,7 @@ function CartPage() {
   }, []);
 
   useEffect(() => {
-    fetch("http://localhost:3001/auth/consult", {
+    fetch(`${process.env.REACT_APP_SERVER_URL}/auth/consult`, {
       method: "get",
       headers: {
         "Content-Type": "application/json",
@@ -146,6 +136,16 @@ function CartPage() {
     });
   }, []);
 
+  function getQuantity(id) {
+    for (var i = 0; i < cartData.data2.length; i++) {
+      var cartItem = cartData.data2[i];
+
+      if (id === cartItem.id) {
+        return cartItem.quantity;
+      }
+    }
+  }
+
   return (
     <Container>
       {logged ? (
@@ -159,7 +159,7 @@ function CartPage() {
                 portion={p.portion}
                 rating={p.rating}
                 deliveryPrice={p.deliveryPrice}
-                quantity={p.quantity}
+                quantity={getQuantity(p._id)}
                 countInStock={p.countInStock}
                 id={p._id}
                 cep={userData.cep}

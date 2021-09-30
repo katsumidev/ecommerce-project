@@ -10,7 +10,7 @@ function MainPage() {
   const navigate = useNavigate();
 
   useEffect(() => {
-    fetch("http://localhost:3001/product/consult", {
+    fetch(`${process.env.REACT_APP_SERVER_URL}/product/consult`, {
       method: "get",
       headers: {
         "Content-Type": "application/json",
@@ -40,7 +40,7 @@ function MainPage() {
                   <ProductCard
                     key={p._id}
                     redirect={() => navigate(`/product/${p._id}`)}
-                    imgsrc={p.image}
+                    imgsrc={`${process.env.REACT_APP_SERVER_URL}/files/${p.image}`}
                     title={p.name}
                     brand={p.brand}
                     price={`R$ ${p.price}`}
