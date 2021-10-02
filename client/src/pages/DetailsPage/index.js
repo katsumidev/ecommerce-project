@@ -42,13 +42,16 @@ function DetailsPage() {
   });
 
   useEffect(() => {
-    fetch(`${process.env.REACT_APP_SERVER_URL}/product/consult?id=${productId}`, {
-      method: "get",
-      headers: {
-        "Content-Type": "application/json",
-        Accept: "application/json",
-      },
-    }).then(async (res) => {
+    fetch(
+      `${process.env.REACT_APP_SERVER_URL}/product/consult?id=${productId}`,
+      {
+        method: "get",
+        headers: {
+          "Content-Type": "application/json",
+          Accept: "application/json",
+        },
+      }
+    ).then(async (res) => {
       let data = await res.json();
 
       switch (res.status) {

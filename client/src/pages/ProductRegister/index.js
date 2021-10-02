@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import Dropzone from "react-dropzone";
 import { AiFillCamera } from "../../styles/Icons";
+import { WithContext as ReactTags } from "react-tag-input";
 import {
   Container,
   ProductRegisterInput,
@@ -15,6 +16,7 @@ import {
   UploadMessage,
   ImageContainer,
   PriceInput,
+  CustomHr,
   Preview,
 } from "./styles";
 
@@ -41,12 +43,17 @@ function ProductRegister() {
 
   function registerProduct() {
     const data = new FormData();
+    var tags_array = [];
+
+    tags.map((i) => {
+      tags_array.push(i.text);
+    });
 
     data.append("name", name);
     data.append("description", desc);
     data.append("brand", brand);
     data.append("category", category);
-    data.append("tags", ["test"]);
+    data.append("tags", JSON.stringify(tags_array));
     data.append("countInStock", stock);
     data.append("deliveryPrice", delivery);
     data.append("price", price);
@@ -99,11 +106,32 @@ function ProductRegister() {
     });
   }
 
+  const handleDelete = (i) => {
+    setTags(tags.filter((tag, index) => index !== i));
+  };
+
+  const handleAddition = (tag) => {
+    setTags([...tags, tag]);
+  };
+
+  const handleDrag = (tag, currPos, newPos) => {
+    const newTags = tags.slice();
+
+    newTags.splice(currPos, 1);
+    newTags.splice(newPos, 0, tag);
+
+    setTags(newTags);
+  };
+
+  const handleTagClick = (index) => {
+    console.log("The tag at index " + index + " was clicked");
+  };
+
   return (
     <Container>
       <ProductRegisterWrapper>
-        <hr />
-        <h1>Register your product</h1>
+        <CustomHr />
+        <h1>Sell your item now!</h1>
         <Row>
           <Column>
             <ProductRegisterInput
@@ -127,7 +155,15 @@ function ProductRegister() {
               <option value="Eletro">Eletrodomestic</option>
             </ProductRegisterSelect>
             <p>Tags</p>
-            <ProductRegisterInput />
+            <ReactTags
+              tags={tags}
+              handleDelete={handleDelete}
+              handleAddition={handleAddition}
+              handleDrag={handleDrag}
+              handleTagClick={handleTagClick}
+              inputFieldPosition="top"
+              autocomplete
+            />
             <Row>
               <Dropzone accept="image/*" onDropAccepted={handleUpload}>
                 {({

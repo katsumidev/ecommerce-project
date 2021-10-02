@@ -66,7 +66,7 @@ router.post(
         description: description,
         brand: brand,
         category: category,
-        tags: tags,
+        tags: JSON.parse(tags),
         countInStock: countInStock,
         deliveryPrice: deliveryPrice,
         price: price,

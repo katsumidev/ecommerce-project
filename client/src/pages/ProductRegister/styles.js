@@ -14,6 +14,85 @@ export const ProductRegisterWrapper = styled.div`
   max-width: 1300px;
   background-color: white;
   margin: 20px auto;
+
+  .ReactTags__tags {
+    position: relative;
+  }
+
+  .ReactTags__tagInput {
+    width: 100%;
+    border-radius: 2px;
+    display: inline-block;
+    outline: none;
+  }
+  .ReactTags__tagInput input.ReactTags__tagInputField,
+  .ReactTags__tagInput input.ReactTags__tagInputField:focus {
+    width: 100%;
+    padding: 1rem;
+    margin: 10px 0;
+    border-radius: 12px;
+    outline: none;
+    background-color: transparent;
+    border: 2px solid var(--accent-color);
+  }
+
+  .ReactTags__selected span.ReactTags__tag {
+    background: var(--accent-color);
+    color: white;
+    font-size: 12px;
+    display: inline-flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    width: fit-content;
+
+    padding: 10px;
+    margin: 5px;
+    border-radius: 2px;
+  }
+  .ReactTags__selected a.ReactTags__remove {
+    color: #aaa;
+    margin-left: 5px;
+    cursor: pointer;
+  }
+
+  .ReactTags__suggestions {
+    position: absolute;
+  }
+  .ReactTags__suggestions ul {
+    list-style-type: none;
+    box-shadow: 0.05em 0.01em 0.5em rgba(0, 0, 0, 0.2);
+    background: white;
+    width: 200px;
+  }
+  .ReactTags__suggestions li {
+    border-bottom: 1px solid #ddd;
+    padding: 5px 10px;
+    margin: 0;
+  }
+  .ReactTags__suggestions li mark {
+    text-decoration: underline;
+    background: none;
+    font-weight: 600;
+  }
+  .ReactTags__suggestions ul li.ReactTags__activeSuggestion {
+    background: #b7cfe0;
+    cursor: pointer;
+  }
+
+  .ReactTags__remove {
+    border: none;
+    cursor: pointer;
+    background: none;
+    margin: 0 0 0 10px;
+    color: white;
+  }
+`;
+
+export const CustomHr = styled.div`
+  height: 1px;
+  background-color: #eeeeee;
+  width: 100%;
+  margin: 20px 0;
 `;
 
 export const ProductRegisterInput = styled.input`
@@ -84,7 +163,7 @@ export const Column = styled.div`
 `;
 
 export const FinishBtn = styled.input`
-  width: 100%;
+  width: 100px;
   padding: 1rem;
   margin: 8px;
   border-radius: 12px;
@@ -147,7 +226,11 @@ export const DropContainer = styled.div`
   ${(props) => props.isDragReject && dragReject};
 `;
 
-export const InformationWrapper = styled.div``;
+export const InformationWrapper = styled.div`
+  display: flex;
+  justify-content: flex-end;
+  width: 100%;
+`;
 
 export const ImageContainer = styled.div`
   display: flex;
