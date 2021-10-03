@@ -36,8 +36,8 @@ const ProductSchema = new mongoose.Schema({
     type: Number,
   },
   image: {
-    type: String,
-  },
+    type: Array,
+  }
 });
 
 const Products = mongoose.model("Products", ProductSchema);

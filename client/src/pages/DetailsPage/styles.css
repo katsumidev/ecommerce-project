@@ -1,0 +1,11 @@
+@import "~react-image-gallery/styles/css/image-gallery.css";
+
+
+.image-gallery-image {
+  display: none !important;
+  position: relative;
+}
+
+.thumb {
+    margin: 200px;
+}

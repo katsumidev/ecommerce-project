@@ -43,44 +43,54 @@ router.get("/consult_similar_products", async (req, res) => {
 router.use(authMiddleware);
 
 router.post(
-  "/register",
+  "/imageupl",
   multer(multerConfig).single("file"),
   async (req, res) => {
     const { filename: key } = req.file;
-    const {
-      name,
-      description,
-      brand,
-      category,
-      tags,
-      countInStock,
-      deliveryPrice,
-      price,
-      quantity,
-      portion,
-    } = req.body;
 
-    try {
-      const products = await Products.create({
-        name: name,
-        description: description,
-        brand: brand,
-        category: category,
-        tags: JSON.parse(tags),
-        countInStock: countInStock,
-        deliveryPrice: deliveryPrice,
-        price: price,
-        quantity: quantity,
-        portion: portion,
-        image: key,
-      });
-      return res.status(200).send(products);
-    } catch (err) {
-      return res.status(400).send({
-        error: `Registration failed, please try it again. --> ${err}`,
-      });
-    }
+    res.send(key);
   }
 );
+
+router.post("/register", async (req, res) => {
+  const {
+    name,
+    description,
+    brand,
+    category,
+    tags,
+    countInStock,
+    deliveryPrice,
+    price,
+    quantity,
+    portion,
+    images,
+  } = req.body;
+
+  console.log(name)
+  console.log(tags)
+  console.log(images)
+
+  try {
+    const products = await Products.create({
+      name: name,
+      description: description,
+      brand: brand,
+      category: category,
+      tags: tags,
+      countInStock: countInStock,
+      deliveryPrice: deliveryPrice,
+      price: price,
+      quantity: quantity,
+      portion: portion,
+      image: images,
+    });
+    return res.status(200).send(products);
+  } catch (err) {
+    return res.status(400).send({
+      error: `Registration failed, please try it again. --> ${err}`,
+    });
+  }
+});
 
 module.exports = (app) => app.use("/product", router);

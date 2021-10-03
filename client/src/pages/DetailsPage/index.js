@@ -2,7 +2,10 @@ import React, { useEffect, useState, useRef } from "react";
 import { Link, useNavigate, useParams } from "react-router-dom";
 import { BsGeoAlt, RiTruckLine } from "../../styles/Icons";
 import Rating from "@material-ui/lab/Rating";
+import { SideBySideMagnifier } from "react-image-magnifiers";
+import ImageGallery from "react-image-gallery";
 import cep from "cep-promise";
+import "./styles.css";
 import ProductCard from "../../components/ProductCard";
 import {
   Container,
@@ -18,6 +21,7 @@ import {
   Description,
   BuyBtns,
   SimilarProducts,
+  CustomHr,
   ProductsList,
   MobilePicture,
 } from "./styles";
@@ -27,6 +31,7 @@ function DetailsPage() {
   const [similarProducts, setSimilarProducts] = useState({ data: [] });
   const [logged, setLogged] = useState(false);
   const [userData, setUserData] = useState({});
+  const [currentImageUrl, setCurrentImage] = useState("");
   const [isDesktop, setDesktop] = useState(window.innerWidth > 1000);
   const [locationInfo, setLocationInfo] = useState({});
   const [buyQuantity, setBuyQuantity] = useState(1);
@@ -60,6 +65,7 @@ function DetailsPage() {
           break;
         case 200:
           setProductData(data);
+          setCurrentImage(data.image[0].original);
           break;
       }
     });
@@ -132,30 +138,42 @@ function DetailsPage() {
     });
   }, [userData]);
 
+  const setView = (event, index) => {
+    setCurrentImage(productData.image[index].original);
+  };
+
   return (
     <Container>
       <PictureWrapper>
-        {isDesktop ? (
-          <Picture
-            enlargedImageContainerClassName="large-image"
-            hoverDelayInMs={0}
-            {...{
-              smallImage: {
-                src: `${process.env.REACT_APP_SERVER_URL}/files/${productData.image}`,
-                width: 480,
-                height: 480,
-              },
-              largeImage: {
-                src: `${process.env.REACT_APP_SERVER_URL}/files/${productData.image}`,
-                width: 1200,
-                height: 1800,
-              },
-            }}
-          />
+        {productData.image != undefined ? (
+          <>
+            <Picture
+              enlargedImageContainerClassName="large-image"
+              hoverDelayInMs={0}
+              {...{
+                smallImage: {
+                  src: currentImageUrl,
+                  width: 480,
+                  height: 480,
+                },
+                largeImage: {
+                  src: currentImageUrl,
+                  width: 1200,
+                  height: 1800,
+                },
+              }}
+            />
+            <ImageGallery
+              items={productData.image}
+              thumbnailClass="thumb" 
+              onThumbnailClick={setView}
+              showFullscreenButton={false}
+              showPlayButton={false}
+              showNav={false}
+            />
+          </>
         ) : (
-          <MobilePicture
-            src={`${process.env.REACT_APP_SERVER_URL}/files/${productData.image}`}
-          />
+          <></>
         )}
       </PictureWrapper>
       <ProductInfo>
@@ -287,7 +305,7 @@ function DetailsPage() {
                 <ProductCard
                   key={p._id}
                   redirect={() => (window.location.href = p._id)}
-                  imgsrc={`${process.env.REACT_APP_SERVER_URL}/files/${p.image}`}
+                  imgsrc={p.image[0].original}
                   title={p.name}
                   brand={p.brand}
                   price={`R$ ${p.price}`}

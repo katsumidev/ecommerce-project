@@ -232,10 +232,18 @@ export const InformationWrapper = styled.div`
   width: 100%;
 `;
 
-export const ImageContainer = styled.div`
+export const ImageContainer = styled.ul`
   display: flex;
-  margin: 10px;
   align-items: center;
+  list-style: none;
+  flex-direction: row;
+  flex-wrap: wrap;
+  flex-direction: row;
+  width: 100%;
+
+  li {
+    margin: 10px;
+  }
 `;
 
 export const Preview = styled.img`

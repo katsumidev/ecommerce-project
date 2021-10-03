@@ -40,7 +40,7 @@ function MainPage() {
                   <ProductCard
                     key={p._id}
                     redirect={() => navigate(`/product/${p._id}`)}
-                    imgsrc={`${process.env.REACT_APP_SERVER_URL}/files/${p.image}`}
+                    imgsrc={p.image[0].original}
                     title={p.name}
                     brand={p.brand}
                     price={`R$ ${p.price}`}

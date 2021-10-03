@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import Dropzone from "react-dropzone";
 import { AiFillCamera } from "../../styles/Icons";
+import { uniqueId } from "lodash";
 import { WithContext as ReactTags } from "react-tag-input";
 import {
   Container,
@@ -20,11 +21,15 @@ import {
   Preview,
 } from "./styles";
 
-function UploadedImage(props) {
+function FileList({ files }) {
   return (
     <ImageContainer>
-      <Preview src={props.preview} />
-      <p>{props.name}</p>
+      {files.map((uploadedFile) => (
+        <li>
+          <Preview src={uploadedFile.preview} />
+          <p>{uploadedFile.name}</p>
+        </li>
+      ))}
     </ImageContainer>
   );
 }
@@ -39,49 +44,77 @@ function ProductRegister() {
   const [delivery, setDelPrice] = useState(0);
   const [price, setPrice] = useState(0);
   const [portion, setPortion] = useState(0);
-  const [pictureInfo, setPictureInfo] = useState({});
+  const [pictureInfo, setPictureInfo] = useState([]);
 
   function registerProduct() {
-    const data = new FormData();
     var tags_array = [];
+    var imgs_array = [];
 
     tags.map((i) => {
       tags_array.push(i.text);
     });
 
-    data.append("name", name);
-    data.append("description", desc);
-    data.append("brand", brand);
-    data.append("category", category);
-    data.append("tags", JSON.stringify(tags_array));
-    data.append("countInStock", stock);
-    data.append("deliveryPrice", delivery);
-    data.append("price", price);
-    data.append("quantity", 1);
-    data.append("portion", portion);
-    data.append("file", pictureInfo.file);
+    pictureInfo.map((item) => {
+      const img_data = new FormData();
 
-    fetch(`${process.env.REACT_APP_SERVER_URL}/product/register`, {
-      method: "post",
-      headers: {
-        Accept: "application/json",
-        Authorization: `Bearer ${localStorage.getItem("access_token")}`,
-      },
-      body: data,
-    }).then(async (res) => {
-      switch (res.status) {
-        case 404:
-          console.log("Usuário não encontrado");
-          break;
-        case 403:
-          console.log("Senha inválida");
-          break;
-        case 200:
-          alert("Produto cadastrado!");
-          window.location.href = "/";
-          break;
-      }
+      img_data.append("file", item.file);
+
+      fetch(`${process.env.REACT_APP_SERVER_URL}/product/imageupl`, {
+        method: "post",
+        headers: {
+          Authorization: `Bearer ${localStorage.getItem("access_token")}`,
+        },
+        body: img_data,
+      }).then(async (res) => {
+        let data = await res.text();
+
+        switch (res.status) {
+          case 200:
+            console.log(data);
+            imgs_array.push({
+              original: `${process.env.REACT_APP_SERVER_URL}/files/${data}`,
+              thumbnail: `${process.env.REACT_APP_SERVER_URL}/files/${data}`,
+            });
+            break;
+        }
+      });
     });
+
+    setTimeout(function () {
+      fetch(`${process.env.REACT_APP_SERVER_URL}/product/register`, {
+        method: "post",
+        headers: {
+          "Content-Type": "application/json",
+          Accept: "application/json",
+          Authorization: `Bearer ${localStorage.getItem("access_token")}`,
+        },
+        body: JSON.stringify({
+          name: name,
+          description: desc,
+          brand: brand,
+          category: category,
+          tags: tags_array,
+          countInStock: stock,
+          deliveryPrice: delivery,
+          price: price,
+          portion: portion,
+          images: imgs_array,
+        }),
+      }).then(async (res) => {
+        switch (res.status) {
+          case 404:
+            console.log("Usuário não encontrado");
+            break;
+          case 403:
+            console.log("Senha inválida");
+            break;
+          case 200:
+            alert("Produto cadastrado!");
+            window.location.href = "/";
+            break;
+        }
+      });
+    }, 3000);
   }
 
   function renderDragMessage(isDragActive, isDragReject) {
@@ -96,13 +129,17 @@ function ProductRegister() {
     return <UploadMessage type="success">Drop it here</UploadMessage>;
   }
 
-  function handleUpload(file) {
-    file.map((item) => {
-      setPictureInfo({
-        file: item,
-        name: item.name,
-        preview: URL.createObjectURL(item),
-      });
+  function handleUpload(files) {
+    files.map((item) => {
+      setPictureInfo([
+        ...pictureInfo,
+        {
+          file: item,
+          id: uniqueId(),
+          name: item.name,
+          preview: URL.createObjectURL(item),
+        },
+      ]);
     });
   }
 
@@ -183,8 +220,8 @@ function ProductRegister() {
                   </DropContainer>
                 )}
               </Dropzone>
-              {pictureInfo.name != null && (
-                <UploadedImage preview={pictureInfo.preview}></UploadedImage>
+              {!!pictureInfo.length && (
+                <FileList files={pictureInfo}></FileList>
               )}
             </Row>
           </Column>

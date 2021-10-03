@@ -9,13 +9,13 @@ export const Container = styled.div`
   background-color: white;
   margin: 20px auto;
   grid-template-columns: 500px auto 320px;
-  grid-template-rows: 470px auto auto;
+  grid-template-rows: auto auto auto;
   grid-template-areas:
     "picture productinfo sellerinfo"
     "productdescription productdescription sellerinfo"
     "recommended recommended .";
 
-  @media (max-width: 1000px) {
+  @media (max-width: 1280px) {
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -23,20 +23,27 @@ export const Container = styled.div`
   }
 `;
 
+export const CustomHr = styled.div`
+  height: 1px;
+  background-color: #eeeeee;
+  width: 100%;
+  margin: 20px 0;
+`;
+
 export const PictureWrapper = styled.div`
-  display: flex;
-  align-items: center;
   grid-area: picture;
 
   .large-image {
     z-index: 998;
   }
+
 `;
+
 export const ProductInfo = styled.div`
   grid-area: productinfo;
   padding: 0 15px 0 0;
 
-  @media (max-width: 1000px) {
+  @media (max-width: 1280px) {
     margin: 20px 0;
   }
 
@@ -70,7 +77,7 @@ export const SellerInfoWrapper = styled.div`
   background-color: white;
   grid-area: sellerinfo;
 
-  @media (max-width: 1000px) {
+  @media (max-width: 1280px) {
     display: flex;
     width: 100%;
   }
@@ -113,7 +120,7 @@ export const Description = styled.div`
   width: 90%;
   margin: 60px 0 40px 0;
 
-  @media (max-width: 1000px) {
+  @media (max-width: 1280px) {
     width: 98%;
   }
 `;
@@ -121,6 +128,7 @@ export const Description = styled.div`
 export const Picture = styled(ReactImageMagnify)`
   height: 450px;
   width: 450px;
+  margin-bottom: 20px;
 `;
 
 export const MobilePicture = styled.img`
@@ -197,7 +205,7 @@ export const BuyBtns = styled.div`
 export const SimilarProducts = styled.div`
   width: 98%;
 
-  @media (min-width: 1000px) {
+  @media (min-width: 1280px) {
     grid-area: recommended;
     display: flex;
     flex-direction: column;

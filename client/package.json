@@ -20,6 +20,7 @@
     "react-dom": "^17.0.2",
     "react-dropzone": "^11.4.2",
     "react-icons": "^4.2.0",
+    "react-image-gallery": "^1.2.7",
     "react-image-magnifiers": "^1.4.0",
     "react-image-magnify": "^2.7.4",
     "react-input-number": "^5.0.19",

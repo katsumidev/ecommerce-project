@@ -46,7 +46,7 @@ function CartCard(props) {
       {valid ? (
         <>
           <Row>
-            <img src={`${process.env.REACT_APP_SERVER_URL}/files/${props.image}`}></img>
+            <img src={props.image[0].original}></img>
             <Info>
               <p>{props.title}</p>
               <sub>
