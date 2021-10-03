@@ -38,7 +38,7 @@ function DetailsPage() {
   const { productId } = useParams();
 
   const updateMedia = () => {
-    setDesktop(window.innerWidth > 1000);
+    setDesktop(window.innerWidth > 500);
   };
 
   useEffect(() => {
@@ -147,30 +147,37 @@ function DetailsPage() {
       <PictureWrapper>
         {productData.image != undefined ? (
           <>
-            <Picture
-              enlargedImageContainerClassName="large-image"
-              hoverDelayInMs={0}
-              {...{
-                smallImage: {
-                  src: currentImageUrl,
-                  width: 480,
-                  height: 480,
-                },
-                largeImage: {
-                  src: currentImageUrl,
-                  width: 1200,
-                  height: 1800,
-                },
-              }}
-            />
-            <ImageGallery
-              items={productData.image}
-              thumbnailClass="thumb" 
-              onThumbnailClick={setView}
-              showFullscreenButton={false}
-              showPlayButton={false}
-              showNav={false}
-            />
+            {isDesktop ? (
+              <>
+                {" "}
+                <Picture
+                  enlargedImageContainerClassName="large-image"
+                  hoverDelayInMs={0}
+                  {...{
+                    smallImage: {
+                      src: currentImageUrl,
+                      width: 480,
+                      height: 480,
+                    },
+                    largeImage: {
+                      src: currentImageUrl,
+                      width: 1200,
+                      height: 1800,
+                    },
+                  }}
+                />
+                <ImageGallery
+                  items={productData.image}
+                  thumbnailClass="thumb"
+                  onThumbnailClick={setView}
+                  showFullscreenButton={false}
+                  showPlayButton={false}
+                  showNav={false}
+                />
+              </>
+            ) : (
+              <MobilePicture src={productData.image[0].original} />
+            )}
           </>
         ) : (
           <></>
