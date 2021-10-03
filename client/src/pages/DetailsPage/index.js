@@ -2,7 +2,6 @@ import React, { useEffect, useState, useRef } from "react";
 import { Link, useNavigate, useParams } from "react-router-dom";
 import { BsGeoAlt, RiTruckLine } from "../../styles/Icons";
 import Rating from "@material-ui/lab/Rating";
-import { SideBySideMagnifier } from "react-image-magnifiers";
 import ImageGallery from "react-image-gallery";
 import cep from "cep-promise";
 import "./styles.css";

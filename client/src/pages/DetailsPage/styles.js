@@ -15,7 +15,7 @@ export const Container = styled.div`
     "productdescription productdescription sellerinfo"
     "recommended recommended .";
 
-  @media (max-width: 1280px) {
+  @media (max-width: 1000px) {
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -43,7 +43,8 @@ export const ProductInfo = styled.div`
   grid-area: productinfo;
   padding: 0 15px 0 0;
 
-  @media (max-width: 1280px) {
+  @media (max-width: 1000px) {
+    width: 100%;
     margin: 20px 0;
   }
 
@@ -77,7 +78,7 @@ export const SellerInfoWrapper = styled.div`
   background-color: white;
   grid-area: sellerinfo;
 
-  @media (max-width: 1280px) {
+  @media (max-width: 1000px) {
     display: flex;
     width: 100%;
   }
@@ -120,7 +121,7 @@ export const Description = styled.div`
   width: 90%;
   margin: 60px 0 40px 0;
 
-  @media (max-width: 1280px) {
+  @media (max-width: 1000px) {
     width: 98%;
   }
 `;
@@ -205,7 +206,7 @@ export const BuyBtns = styled.div`
 export const SimilarProducts = styled.div`
   width: 98%;
 
-  @media (min-width: 1280px) {
+  @media (min-width: 1000px) {
     grid-area: recommended;
     display: flex;
     flex-direction: column;

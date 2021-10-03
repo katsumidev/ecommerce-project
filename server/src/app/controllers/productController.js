@@ -46,9 +46,14 @@ router.post(
   "/imageupl",
   multer(multerConfig).single("file"),
   async (req, res) => {
-    const { filename: key } = req.file;
+    try {
+      const { filename: key } = req.file;
 
-    res.send(key);
+      res.send(key);
+    }
+    catch (err) {
+      return res.status(400).send(`Failed :( --> ${err}`);
+    }
   }
 );
 
@@ -66,10 +71,6 @@ router.post("/register", async (req, res) => {
     portion,
     images,
   } = req.body;
-
-  console.log(name)
-  console.log(tags)
-  console.log(images)
 
   try {
     const products = await Products.create({

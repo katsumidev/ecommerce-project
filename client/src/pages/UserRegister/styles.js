@@ -105,6 +105,12 @@ export const ImageContainer = styled.div`
   width: 100%;
   margin: 10px;
   align-items: center;
+
+  p {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
 `;
 
 export const Preview = styled.img`

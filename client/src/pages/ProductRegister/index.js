@@ -27,7 +27,6 @@ function FileList({ files }) {
       {files.map((uploadedFile) => (
         <li>
           <Preview src={uploadedFile.preview} />
-          <p>{uploadedFile.name}</p>
         </li>
       ))}
     </ImageContainer>
@@ -70,12 +69,14 @@ function ProductRegister() {
 
         switch (res.status) {
           case 200:
-            console.log(data);
             imgs_array.push({
               original: `${process.env.REACT_APP_SERVER_URL}/files/${data}`,
               thumbnail: `${process.env.REACT_APP_SERVER_URL}/files/${data}`,
             });
             break;
+          case 400:
+            alert("Ocorreu um erro no processamento da imagem!");
+          break;
         }
       });
     });
@@ -189,7 +190,18 @@ function ProductRegister() {
               onChange={(e) => setCategory(e.target.value)}
             >
               <option value="Cars">Cars</option>
-              <option value="Eletro">Eletrodomestic</option>
+              <option value="Videogames">Videogames</option>
+              <option value="Eletrodomestics">Eletrodomestics</option>
+              <option value="Pets">Pets</option>
+              <option value="Music">Music</option>
+              <option value="Sports">Sports</option>
+              <option value="Clothing and accessories">Clothing and accessories</option>
+              <option value="Bikes">Bikes</option>
+              <option value="Forniture">Forniture</option>
+              <option value="Forniture">Books</option>
+              <option value="Forniture">Study</option>
+              <option value="Forniture">DIY</option>
+              <option value="Other">Other</option>
             </ProductRegisterSelect>
             <p>Tags</p>
             <ReactTags
