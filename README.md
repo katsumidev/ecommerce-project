@@ -58,6 +58,7 @@ Run it!
 ## Ideas to future updates
 
 - [X] Create a route for product registration.
+- [X] Create a slideshow product picture in the details page 
 - [ ] Create a route for the user account settings.
 - [ ] Organize the requests on a main file.
 - [ ] Create a functional rating system.
