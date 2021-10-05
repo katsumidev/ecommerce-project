@@ -186,7 +186,7 @@ function DetailsPage() {
         <h2>{productData.name}</h2>
         <Rating
           name="half-rating"
-          defaultValue={productData}
+          defaultValue={4.7}
           size="medium"
           precision={0.5}
           readOnly

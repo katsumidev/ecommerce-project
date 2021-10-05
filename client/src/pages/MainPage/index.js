@@ -43,10 +43,10 @@ function MainPage() {
                     imgsrc={p.image[0].original}
                     title={p.name}
                     brand={p.brand}
-                    price={`R$ ${p.price}`}
-                    portion={`${p.portion}x R$${(p.price / p.portion).toFixed(
+                    price={`$ ${p.price}`}
+                    portion={`${p.portion}x $${(p.price / p.portion).toFixed(
                       2
-                    )} sem juros`}
+                    )}`}
                   />
                 </li>
               );

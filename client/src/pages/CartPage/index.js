@@ -1,9 +1,16 @@
 import React, { useEffect, useState } from "react";
 import Rating from "@material-ui/lab/Rating";
-import { Container, CartContainer, Info, Row, StockInfo } from "./styles";
+import {
+  Container,
+  CartContainer,
+  Info,
+  Row,
+  StockInfo,
+  FinalInfo,
+  BuyNowBtn,
+} from "./styles";
 
 function CartCard(props) {
-  const [buyQuantity, setBuyQuantity] = useState(1);
   const [valid, setValid] = useState(true);
 
   function undoRemove() {
@@ -29,14 +36,17 @@ function CartCard(props) {
 
   function removeFromCart() {
     setValid(!valid);
-    fetch(`${process.env.REACT_APP_SERVER_URL}/cart/removeFromCart?id=${props.id}`, {
-      method: "get",
-      headers: {
-        "Content-Type": "application/json",
-        Accept: "application/json",
-        Authorization: `Bearer ${localStorage.getItem("access_token")}`,
-      },
-    }).then(async (res) => {
+    fetch(
+      `${process.env.REACT_APP_SERVER_URL}/cart/removeFromCart?id=${props.id}`,
+      {
+        method: "get",
+        headers: {
+          "Content-Type": "application/json",
+          Accept: "application/json",
+          Authorization: `Bearer ${localStorage.getItem("access_token")}`,
+        },
+      }
+    ).then(async (res) => {
       let data = await res.json();
     });
   }
@@ -50,18 +60,30 @@ function CartCard(props) {
             <Info>
               <p>{props.title}</p>
               <sub>
-                $ {props.price} {props.portion}x of {"$"}
-                {(props.price / props.portion).toFixed(2)}
+                {" "}
+                {props.price.toLocaleString("en-US", {
+                  style: "currency",
+                  currency: "USD",
+                })}{" "}
+                {props.portion}x of{" "}
+                {(props.price / props.portion).toLocaleString("en-US", {
+                  style: "currency",
+                  currency: "USD",
+                })}
               </sub>
               <Rating
                 name="half-rating"
-                defaultValue={props.rating}
+                defaultValue={4.7}
                 size="small"
                 precision={0.5}
                 readOnly
               />
               <b>
-                $ {props.deliveryPrice} to {props.cep}
+                {props.deliveryPrice.toLocaleString("en-US", {
+                  style: "currency",
+                  currency: "USD",
+                })}{" "}
+                to {props.cep}
               </b>
             </Info>
           </Row>
@@ -71,17 +93,14 @@ function CartCard(props) {
               value="Remove"
               onClick={() => removeFromCart()}
             />
-            <select
-              defaultValue={
-                props.quantity < props.countInStock
-                  ? props.quantity
-                  : props.countInStock
-              }
-            >
-              {Array.from(Array(props.countInStock + 1).keys()).map((i) => {
-                return <option value={i}>{i}</option>;
+            <strong>Quantity: {props.quantity}</strong>
+            <p>
+              Product sub total:{" "}
+              {props.itemSubTotal.toLocaleString("en-US", {
+                style: "currency",
+                currency: "USD",
               })}
-            </select>
+            </p>
             <sub>{props.countInStock} In Stock</sub>
           </StockInfo>
         </>
@@ -95,6 +114,7 @@ function CartCard(props) {
 function CartPage() {
   const [logged, setLogged] = useState(false);
   const [cartData, setCartData] = useState({ data: [] });
+  const [productSubTotal, setSubTotal] = useState(0);
   const [userData, setUserData] = useState({});
 
   useEffect(() => {
@@ -146,6 +166,40 @@ function CartPage() {
     }
   }
 
+  function getSubTotal(id, price) {
+    var quantity = getQuantity(id);
+
+    return quantity * price;
+  }
+
+  function getItemQuantity() {
+    let total = 0;
+
+    cartData.data.forEach((p) => {
+      var f = getQuantity(p._id);
+      total = total + f;
+    });
+
+    return total;
+  }
+
+  useEffect(() => {
+    var array = [];
+    var total = 0;
+
+    cartData.data.forEach((p) => {
+      var itemPrice = getSubTotal(p._id, p.price);
+
+      array.push(itemPrice);
+    });
+
+    for (var i = 0; i < array.length; ++i) {
+      total += array[i];
+    }
+
+    setSubTotal(total);
+  }, [cartData]);
+
   return (
     <Container>
       {logged ? (
@@ -160,12 +214,25 @@ function CartPage() {
                 rating={p.rating}
                 deliveryPrice={p.deliveryPrice}
                 quantity={getQuantity(p._id)}
+                itemSubTotal={getSubTotal(p._id, p.price)}
                 countInStock={p.countInStock}
                 id={p._id}
                 cep={userData.cep}
               />
             );
           })}
+          <FinalInfo>
+            <p>
+              Subtotal ({getItemQuantity()} items):{" "}
+              <strong>
+                {productSubTotal.toLocaleString("en-US", {
+                  style: "currency",
+                  currency: "USD",
+                })}
+              </strong>
+            </p>
+            <BuyNowBtn type="button" value="Buy Now" />
+          </FinalInfo>
         </>
       ) : (
         <h1>You must be logged to use the cart</h1>

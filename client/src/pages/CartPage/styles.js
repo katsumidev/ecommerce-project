@@ -72,6 +72,24 @@ export const Info = styled.div`
   }
 `;
 
+export const BuyNowBtn = styled.input`
+  width: 100%;
+  padding: 1rem;
+  border-radius: 12px;
+  margin: 10px 0;
+  outline: none;
+  font-weight: 900;
+  color: white;
+  background-color: var(--accent-color);
+  border: none;
+  cursor: pointer;
+  transition: 0.2s;
+
+  :hover {
+    background-color: var(--accent-color-hover);
+  }
+`;
+
 export const Row = styled.div`
   display: flex;
   flex-direction: row;
@@ -87,4 +105,11 @@ export const StockInfo = styled.div`
   sub {
     white-space: nowrap;
   }
+`;
+
+export const FinalInfo = styled.div`
+  display: flex;
+  flex-direction: column;
+  margin: 50px 0;
+  padding: 20px;
 `;
