@@ -3,6 +3,8 @@
 ### I made it for study purposes, just to learn more about react, responsive design, rest APIs, routes, mongo database, express, mongoose and much more. This is a full stack application, with an back-end made in nodejs and a front-end made in reactjs. 
 ---
 
+![EcommerceGif](https://github.com/eveprice/ecommerce-project/blob/main/ecommerce-gif.gif)
+
 ## 💾 Installing 
 
 Git clone the repository
