@@ -231,7 +231,7 @@ function DetailsPage() {
                 </DeliveryInfo>
               ) : (
                 <DeliveryInfo>
-                  <RiTruckLine size={25} fill="#d7263d" />
+                  <RiTruckLine size={25} fill="var(--accent-color)" />
                   <p>
                     Shipping <a>FREE</a>
                   </p>
