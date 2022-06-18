@@ -3,14 +3,14 @@
 ### I made it for study purposes, just to learn more about react, responsive design, rest APIs, routes, mongo database, express, mongoose and much more. This is a full stack application, with an back-end made in nodejs and a front-end made in reactjs. 
 ---
 
-![EcommerceGif](https://github.com/eveprice/ecommerce-project/blob/main/ecommerce-gif.gif)
+![EcommerceGif](https://github.com/mooncoded/ecommerce-project/blob/main/ecommerce-gif.gif)
 
 ## 💾 Installing 
 
 Git clone the repository
 
 ```
-git clone https://github.com/eveprice/ecommerce-project
+git clone https://github.com/mooncoded/ecommerce-project
 ```
 
 Create the mongo database
@@ -72,10 +72,10 @@ Run it!
 <table>
   <tr>
     <td  align=center>
-        <img src="https://avatars.githubusercontent.com/u/90803853?v=4" width="100px" alt="Eve Price">
-        <a href="https://github.com/eveprice">
+        <img src="https://avatars.githubusercontent.com/u/90803853?v=4" width="100px" alt="Moon">
+        <a href="https://github.com/mooncoded">
           <br>
-            Eve Price
+            Moon
           </br>
         </a>
     </td>
