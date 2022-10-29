@@ -266,11 +266,16 @@ function ProductRegister() {
           </Column>
         </Row>
         <InformationWrapper>
-          <FinishBtn
+          {/* <FinishBtn
             type="button"
             value="Finish"
             onClick={() => registerProduct()}
-          />
+          /> */}
+           <FinishBtn
+            type="button"
+            value="Finish"
+            onClick={() => alert("Essa função só está disponivel na branch de desenvolvimento")}
+          /> 
         </InformationWrapper>
       </ProductRegisterWrapper>
     </Container>
