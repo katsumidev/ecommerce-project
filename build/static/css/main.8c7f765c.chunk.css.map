@@ -1,0 +1,1 @@
+{"version":3,"sources":["webpack://src/pages/DetailsPage/styles.css"],"names":[],"mappings":"AAGA,qBACE,sBAAwB,CACxB,iBACF,CAEA,OACI,YACJ","file":"main.8c7f765c.chunk.css","sourcesContent":["@import \"~react-image-gallery/styles/css/image-gallery.css\";\n\n\n.image-gallery-image {\n  display: none !important;\n  position: relative;\n}\n\n.thumb {\n    margin: 200px;\n}"]}
