@@ -4,9 +4,8 @@ import InputNumber from "react-input-number";
 export const Container = styled.div``;
 export const RegisterWrapper = styled.div`
   width: 400px;
-  background-color: white;
-  border-radius: 12px;
-  margin: 5% auto;
+  border-radius: 2px;
+  margin: 0 auto;
   display: flex;
   padding: 50px;
   justify-content: center;
@@ -28,7 +27,7 @@ export const RegisterInput = styled.input`
   width: 100%;
   padding: 1rem;
   margin: 10px;
-  border-radius: 12px;
+  border-radius: 2px;
   outline: none;
   background-color: transparent;
   border: 2px solid var(--accent-color);
@@ -38,7 +37,7 @@ export const NumberInput = styled(InputNumber)`
   width: 100%;
   padding: 1rem;
   margin: 10px;
-  border-radius: 12px;
+  border-radius: 2px;
   outline: none;
   background-color: transparent;
   border: 2px solid var(--accent-color);
@@ -48,7 +47,7 @@ export const RegisterButton = styled.input`
   width: 100%;
   padding: 1rem;
   margin: 8px;
-  border-radius: 12px;
+  border-radius: 2px;
   outline: none;
   font-weight: 900;
   color: white;
@@ -87,7 +86,7 @@ export const DropContainer = styled.div`
   padding: 20px;
   margin: 20px;
   width: 100%;
-  border: 1px dashed #ddd;
+  border: 1px dashed #000;
   border-radius: 4px;
   cursor: pointer;
   display: flex;

@@ -1,22 +1,27 @@
 import styled from "styled-components";
 
 export const Container = styled.div`
-  min-width: 200px;
-  max-width: 200px;
-  height: 350px;
-  background-color: white;
+  max-width: 300px;
+  height: auto;
+  width: auto;
   display: flex;
   flex-direction: column;
-  border-radius: 7px;
+  border-radius: 2px;
   align-items: flex-start;
   word-break: break-all;
   cursor: pointer;
+`;
+
+export const ImageContainer = styled.div`
+  max-width: 300px;
+  max-height: 300px;
+  height: auto;
+  width: auto;
 
   img {
     width: 100%;
-    height: 200px;
-    margin: 0 auto;
-    border-radius: 7px;
+    height: 100%;
+    border-radius: 2px;
     border-bottom: 1px solid rgb(0, 0, 0, 0.1);
   }
 `;
@@ -25,7 +30,7 @@ export const ProductInfo = styled.div`
   display: flex;
   flex-direction: column;
   overflow: hidden;
-  padding: 10px;
+  margin-top: 7px;
   width: 100%;
 
   sub p {
@@ -38,7 +43,7 @@ export const PriceInfo = styled.div`
 `;
 
 export const AboutInfo = styled.div`
-  margin-top: 15px;
+  width: 70%;
 
   div {
     display: -webkit-box;
@@ -49,13 +54,10 @@ export const AboutInfo = styled.div`
   }
 
   div a {
-    font-size: 11pt;
+    font-size: 0.9rem;
+    font-weight: 900;
+    text-transform: capitalize;
     cursor: pointer;
-
-    :hover {
-      color: var(--accent-color-hover);
-      text-decoration: underline;
-    }
   }
 
   sub p {

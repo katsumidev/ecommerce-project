@@ -4,7 +4,7 @@ import ReactImageMagnify from "react-image-magnify";
 export const Container = styled.div`
   display: grid;
   padding: 26px;
-  border-radius: 12px;
+  border-radius: 2px;
   max-width: 1300px;
   background-color: white;
   margin: 20px auto;
@@ -56,6 +56,7 @@ export const ProductInfo = styled.div`
     display: -webkit-box;
     -webkit-line-clamp: 2;
     -webkit-box-orient: vertical;
+    text-transform: capitalize;
   }
 
   h1 {
@@ -89,7 +90,7 @@ export const SellerInfo = styled.div`
   padding: 16px;
   height: 100%;
   border: 1.5px solid #eeeeee;
-  border-radius: 12px;
+  border-radius: 2px;
   font-size: 11pt;
 
   ul {
@@ -165,7 +166,7 @@ export const Delivery = styled.div`
 export const BuyNowBtn = styled.input`
   width: 100%;
   padding: 1rem;
-  border-radius: 12px;
+  border-radius: 2px;
   outline: none;
   font-weight: 900;
   color: white;
@@ -182,18 +183,18 @@ export const BuyNowBtn = styled.input`
 export const AddToCartBtn = styled.input`
   width: 100%;
   padding: 1rem;
-  border-radius: 12px;
+  border-radius: 2px;
   outline: none;
   font-weight: 900;
   border: none;
-  background-color: rgba(128, 93, 147, 0.5);
+  background-color: rgba(53, 53, 53, 0.5);
   cursor: pointer;
   transition: 0.2s;
 
   margin: 10px 0;
 
   :hover {
-    background-color: rgba(128, 93, 147, 0.7);
+    background-color: rgba(53, 53, 53, 0.7);
   }
 `;
 
@@ -222,7 +223,7 @@ export const ProductsList = styled.ul`
   background-color: #eeeeee;
   padding: 16px;
   max-width: 900px;
-  border-radius: 12px;
+  border-radius: 2px;
   overflow: hidden;
   -webkit-overflow-scrolling: touch;
 

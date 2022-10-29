@@ -4,4 +4,5 @@ export {
   RiTruckLine,
   RiShoppingCartLine,
 } from "react-icons/ri";
-export {AiFillCamera} from 'react-icons/ai'
+export { AiFillCamera } from "react-icons/ai";
+export { HiOutlineShoppingBag } from "react-icons/hi";

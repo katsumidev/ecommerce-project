@@ -7,7 +7,8 @@ export const Container = styled.div`
   margin: 20px 0;
 `;
 export const CartContainer = styled.div`
-  width: 50%;
+  width: 60%;
+  max-width: 900px;
   display: flex;
   flex-direction: row;
   margin: 5px;
@@ -15,17 +16,17 @@ export const CartContainer = styled.div`
   justify-content: space-between;
   align-items: center;
   padding: 16px;
-  border-radius: 12px;
+  border-radius: 2px;
 
   input {
     width: 100%;
     padding: 0.5rem;
     margin: 10px;
-    border-radius: 12px;
+    border-radius: 2px;
     outline: none;
     font-weight: 900;
     color: white;
-    background-color: var(--accent-color);
+    background-color: var(--mainText);
     border: none;
     cursor: pointer;
     transition: 0.2s;
@@ -36,9 +37,10 @@ export const CartContainer = styled.div`
   }
 
   @media (max-width: 500px) {
-    width: 100%;
+    width: 95%;
     flex-direction: column;
     height: auto;
+    background-color: var(--secundary-background);
   }
 
   img {
@@ -75,12 +77,12 @@ export const Info = styled.div`
 export const BuyNowBtn = styled.input`
   width: 100%;
   padding: 1rem;
-  border-radius: 12px;
+  border-radius: 2px;
   margin: 10px 0;
   outline: none;
   font-weight: 900;
   color: white;
-  background-color: var(--accent-color);
+  background-color: var(--mainText);
   border: none;
   cursor: pointer;
   transition: 0.2s;

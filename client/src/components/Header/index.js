@@ -1,8 +1,8 @@
 import React, { useEffect, useState, useRef } from "react";
 import {
-  BsGeoAlt,
+  RiTruckLine,
   RiArrowDropDownLine,
-  RiShoppingCartLine,
+  HiOutlineShoppingBag,
 } from "../../styles/Icons";
 import { useSelector } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
@@ -11,8 +11,6 @@ import {
   Container,
   LocationInfo,
   SearchWrapper,
-  SearchTitle,
-  SearchBarContent,
   ProfilePicture,
   UserProfile,
   DropDownMenu,
@@ -22,12 +20,15 @@ import {
   SearchBar,
   Row,
   UserInfo,
-  CartWrapper,
+  MenuWrapper,
   Menu,
+  LocationDropDownContainer,
+  LocationDropDown,
 } from "./styles";
 function Header() {
   const [logged, setLogged] = useState(false);
   const [open, setOpen] = useState(false);
+  const [locationOpen, setLocationOpen] = useState(false);
   const [userData, setUserData] = useState({});
   const dropdownRef = useRef(null);
   const [locationInfo, setLocationInfo] = useState({});
@@ -64,18 +65,19 @@ function Header() {
         dropdownRef.current !== null &&
         !dropdownRef.current.contains(e.target)
       ) {
-        setOpen(!open);
+        setOpen(false);
+        setLocationOpen(false);
       }
     };
 
-    if (open) {
+    if (open || locationOpen) {
       window.addEventListener("click", pageClick);
     }
 
     return () => {
       window.removeEventListener("click", pageClick);
     };
-  }, [open]);
+  }, [open, locationOpen]);
 
   function logout() {
     localStorage.removeItem("access_token");
@@ -86,58 +88,52 @@ function Header() {
 
   return (
     <Container>
-      <LocationInfo>
-        <BsGeoAlt size={25} />
-        <div>
-          {logged ? (
-            <>
-              <p>Deliver to</p>
-              <h3>
-                {locationInfo.city} {locationInfo.cep}
-              </h3>
-            </>
-          ) : (
-            <p>Do login to see this information</p>
-          )}
-        </div>
-      </LocationInfo>
-      <SearchWrapper>
-        <SearchBar placeholder="Search for products here..." />
-        <div className="separator"></div>
-        <SearchIcon />
-      </SearchWrapper>
-      <CartWrapper onClick={() => navigate("/cart")}>
-        <RiShoppingCartLine size={25} />
-        <h4>Your cart</h4>
-      </CartWrapper>
+      <img src="/assets/logo.png" width={60} height={60} onClick={() => navigate("/")} />
       <Row>
-        <Menu
-          buttonWidth={30}
-          barColor="#FFFFFF"
-          isActive={open}
-          toggleButton={() => setOpen(!open)}
-        />
         <UserInfo>
           {logged ? (
             <>
-              <p>Hi {userData.name}</p>
-              <div className="userinfo_div" onClick={() => setOpen(!open)}>
-                <strong>Your account</strong>
-                <RiArrowDropDownLine size={30} />
-              </div>
+              <MenuWrapper>
+                <LocationInfo>
+                  <div>
+                    {logged ? (
+                      <LocationDropDownContainer locationOpen={locationOpen}>
+                        <LocationDropDown>
+                          <p>Deliver to</p>
+                          <h3>
+                            {locationInfo.city} {locationInfo.cep}
+                          </h3>
+                        </LocationDropDown>
+                      </LocationDropDownContainer>
+                    ) : (
+                      <p>Do login to see this information</p>
+                    )}
+                  </div>
+                  <RiTruckLine size={20} onClick={() => setLocationOpen(!locationOpen)}/>
+                </LocationInfo>
+                <HiOutlineShoppingBag
+                  onClick={() => navigate("/cart")}
+                  size={20}
+                />
+                <Menu
+                  buttonWidth={20}
+                  isActive={open}
+                  toggleButton={() => setOpen(!open)}
+                />
+              </MenuWrapper>
             </>
           ) : (
             <>
               <div className="userinfo_div" onClick={() => setOpen(!open)}>
                 <strong>Login</strong>
-                <RiArrowDropDownLine size={30} />
+                <RiArrowDropDownLine size={20} />
               </div>
             </>
           )}
         </UserInfo>
         <DropDownContainer open={open} ref={dropdownRef}>
           {open && (
-            <DropDownMenu>
+            <DropDownMenu key={open}>
               {logged ? (
                 <UserProfile>
                   <ProfilePicture

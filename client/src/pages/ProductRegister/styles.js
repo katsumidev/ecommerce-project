@@ -10,7 +10,7 @@ export const ProductRegisterWrapper = styled.div`
   align-items: center;
   flex-direction: column;
   padding: 26px;
-  border-radius: 12px;
+  border-radius: 2px;
   max-width: 1300px;
   background-color: white;
   margin: 20px auto;
@@ -30,7 +30,7 @@ export const ProductRegisterWrapper = styled.div`
     width: 100%;
     padding: 1rem;
     margin: 10px 0;
-    border-radius: 12px;
+    border-radius: 2px;
     outline: none;
     background-color: transparent;
     border: 2px solid var(--accent-color);
@@ -99,7 +99,7 @@ export const ProductRegisterInput = styled.input`
   width: 100%;
   padding: 1rem;
   margin: 10px 0;
-  border-radius: 12px;
+  border-radius: 2px;
   outline: none;
   background-color: transparent;
   border: 2px solid var(--accent-color);
@@ -109,7 +109,7 @@ export const NumberInput = styled(InputNumber)`
   width: 100%;
   padding: 1rem;
   margin: 10px 0;
-  border-radius: 12px;
+  border-radius: 2px;
   outline: none;
   background-color: transparent;
   border: 2px solid var(--accent-color);
@@ -119,7 +119,7 @@ export const PriceInput = styled(CurrencyInput)`
   width: 100%;
   padding: 1rem;
   margin: 10px 0;
-  border-radius: 12px;
+  border-radius: 2px;
   outline: none;
   background-color: transparent;
   border: 2px solid var(--accent-color);
@@ -129,7 +129,7 @@ export const ProductRegisterSelect = styled.select`
   width: 100%;
   padding: 1rem;
   margin: 10px 0;
-  border-radius: 12px;
+  border-radius: 2px;
   outline: none;
   background-color: transparent;
   border: 2px solid var(--accent-color);
@@ -166,7 +166,7 @@ export const FinishBtn = styled.input`
   width: 100px;
   padding: 1rem;
   margin: 8px;
-  border-radius: 12px;
+  border-radius: 2px;
   outline: none;
   font-weight: 900;
   color: white;

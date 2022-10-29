@@ -11,6 +11,7 @@ export default createGlobalStyle`
         background-color: var(--main-background);
         text-rendering: optimizeLegibility;
         -webkit-font-smoothing: antialiased;
+        color: var(--mainText);
     }
 
     svg {
@@ -18,9 +19,11 @@ export default createGlobalStyle`
     }
 
     :root {
-        --main-background: #EEEEEE;
-        --secondary-background: #ffffff;
-        --accent-color: #BA84D2;
-        --accent-color-hover: #8b56a8;
+        --main-background: #ffffff;
+        --mainText: #000000;
+        --secundary-background: #EEEEEE;
+        --tertiary-background: #E8E5E9;
+        --accent-color:  #000000;
+        --accent-color-hover:  #353535;
     }
 `;

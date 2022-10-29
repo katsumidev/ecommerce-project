@@ -12,7 +12,7 @@ function UserLogin() {
   const [userEmail, setUserEmail] = useState("");
   const [userPass, setUserPass] = useState("");
 
-  function authenticateUser() {
+  const authenticateUser = (e) => {
     fetch(`${process.env.REACT_APP_SERVER_URL}/auth/authenticate`, {
       method: "post",
       headers: {
@@ -40,6 +40,8 @@ function UserLogin() {
           break;
       }
     });
+
+    e.preventDefault();
   }
 
   function userLogin(token) {
@@ -50,22 +52,23 @@ function UserLogin() {
 
   return (
     <Container>
-      <LoginWrapper>
+      <LoginWrapper onSubmit={authenticateUser}>
         <h2>Hi 👋, Use your email and password to login!</h2>
         <p>Email</p>
         <LoginInput
           type="text"
           onChange={(e) => setUserEmail(e.target.value)}
+          required
         />
         <p>Password</p>
         <LoginInput
           type="password"
           onChange={(e) => setUserPass(e.target.value)}
+          required
         />
         <LoginButton
-          type="button"
+          type="submit"
           value="Login"
-          onClick={() => authenticateUser()}
         />
         <CreateAccountButton
           type="button"
